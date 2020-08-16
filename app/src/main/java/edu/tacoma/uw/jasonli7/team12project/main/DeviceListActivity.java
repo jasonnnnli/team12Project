@@ -109,6 +109,8 @@ public class DeviceListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mDeviceList != null) {
+            DeviceContent.priceSort(false); //__________________________--------------->test sorts!
+            mDeviceList = DeviceContent.ITEMS;
             mRecyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
                     this, mDeviceList, mTwoPane));
         }
@@ -156,6 +158,7 @@ public class DeviceListActivity extends AppCompatActivity {
         SimpleItemRecyclerViewAdapter(DeviceListActivity parent,
                                       List<Device> items,
                                       boolean twoPane) {
+
             mValues = items;
             mParentActivity = parent;
             mTwoPane = twoPane;

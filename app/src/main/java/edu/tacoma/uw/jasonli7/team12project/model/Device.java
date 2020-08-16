@@ -18,7 +18,7 @@ import java.util.List;
  *
  * A class for creating Device objects..
  */
-public class Device implements Serializable {
+public class Device implements Comparable<Device> {
 
     private String mDeviceName;
     private int mNumberOfReviews;
@@ -116,10 +116,18 @@ public static final String DEVICE_LIST = "devicelist";
                JSONObject obj = arr.getJSONObject(i);
                Device device = new Device(obj.getString(Device.DEVICE_NAME), dev, DeviceContent.mockPrice());
                DeviceContent.addItem(device);
-               //Log.e("was", Course.ID);
                devices.add(device);
            }
        }
        return devices;
    }
+
+    @Override
+    public int compareTo(Device device) {
+       if (DeviceContent.SORT_PRICE) {
+           return (int) ((int) this.getPrice() - device.getPrice());
+       } else {
+           return (int) ((int) (this.getAvgRate() *100) - (device.getAvgRate()* 100));
+       }
+    }
 }
