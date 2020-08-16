@@ -2,6 +2,7 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,6 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ import org.json.JSONObject;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
 
+import edu.tacoma.uw.jasonli7.team12project.authenticate.RegisterActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
@@ -36,6 +40,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,9 +65,12 @@ public class DeviceListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.device_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        getSupportActionBar().setIcon(R.drawable.top);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        toolbar.setTitle("iRate");
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +87,54 @@ public class DeviceListActivity extends AppCompatActivity {
          mRecyclerView = findViewById(R.id.device_list);
         assert mRecyclerView != null;
         setupRecyclerView((RecyclerView) mRecyclerView);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
+    /**
+     * Click listener for the sorting menu
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.sort_rating) {
+            DeviceContent.priceSort(false);
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+        } else if (item.getItemId() == R.id.sort_price) {
+            DeviceContent.priceSort(true);
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+        } else if (item.getItemId() == R.id.range_below_300) {
+            DeviceContent.PRICE_MIN = 0;
+            DeviceContent.PRICE_MAX = 300;
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+
+        } else if (item.getItemId() == R.id.devices_300_600) {
+            DeviceContent.PRICE_MIN = 300;
+            DeviceContent.PRICE_MAX = 600;
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+
+        } else if (item.getItemId() == R.id.range_above_600) {
+            DeviceContent.PRICE_MIN = 600;
+            DeviceContent.PRICE_MAX = 1000000;
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+
+        } else if (item.getItemId() == R.id.show_all) {
+            DeviceContent.PRICE_MIN = 0;
+            DeviceContent.PRICE_MAX = 1000000;
+            assert mRecyclerView != null;
+            setupRecyclerView((RecyclerView) mRecyclerView);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -109,8 +165,19 @@ public class DeviceListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mDeviceList != null) {
-            DeviceContent.priceSort(false); //__________________________--------------->test sorts!
-            mDeviceList = DeviceContent.ITEMS;
+            mDeviceList = new ArrayList<>();
+            List<Device> temp = new ArrayList<>();
+            if (DeviceContent.PRICE_MIN > 0 || DeviceContent.PRICE_MAX < 1000000) {
+                                                       //__________________________--------------->test sorts!
+                for (Device d : DeviceContent.ITEMS) {
+                    if (d.getPrice() > DeviceContent.PRICE_MIN && d.getPrice() < DeviceContent.PRICE_MAX) {
+                        temp.add(d);
+                    }
+                    mDeviceList = temp;
+                }
+            } else {
+                mDeviceList = DeviceContent.ITEMS;
+            }
             mRecyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
                     this, mDeviceList, mTwoPane));
         }

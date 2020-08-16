@@ -27,6 +27,10 @@ public class DeviceContent {
      */
     public static  Map<String, Device> ITEM_MAP = new HashMap<String, Device>();
 
+    public static double PRICE_MIN = 0;
+
+    public static double PRICE_MAX = 1000000;
+
     public static  List<Review> mReviews;
 
     public static  boolean SORT_PRICE = false;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sort_rating"
+        android:orderInCategory="100"
+        android:title="Sort by Rating"
+        />
+    <item
+        android:id="@+id/sort_price"
+        android:orderInCategory="100"
+        android:title="Sort by Price"
+        />
+    <item
+        android:id="@+id/range_below_300"
+        android:orderInCategory="100"
+        android:title="Devises below $300" />
+    <item
+        android:id="@+id/devices_300-600"
+        android:orderInCategory="100"
+        android:title="Devices $300 - $600"
+        />
+    <item
+        android:id="@+id/range_above_600"
+        android:orderInCategory="100"
+        android:title="$600 and up"
+       />
+    <item
+        android:id="@+id/show_all"
+        android:orderInCategory="100"
+        android:title="Show All"
+        />
+</menu>
