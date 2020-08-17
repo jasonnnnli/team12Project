@@ -33,6 +33,7 @@ import edu.tacoma.uw.jasonli7.team12project.authenticate.RegisterActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
+import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -148,6 +149,8 @@ public class DeviceListActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             if (mDeviceList == null) {
+                new DeviceTask().execute(getString(R.string.get_reviews));
+
                 new DeviceTask().execute(getString(R.string.get_devices));
             }
         }
@@ -176,6 +179,7 @@ public class DeviceListActivity extends AppCompatActivity {
                     mDeviceList = temp;
                 }
             } else {
+                mDeviceList = new ArrayList<>();
                 mDeviceList = DeviceContent.ITEMS;
             }
             mRecyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
@@ -196,7 +200,7 @@ public class DeviceListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Device item = (Device) view.getTag();
-                //InfoHolder.InfoPass.setReviewList(item.getReviews());
+
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(DeviceDetailFragment.ARG_ITEM_ID, item.getDeviceName());
@@ -328,7 +332,7 @@ public class DeviceListActivity extends AppCompatActivity {
          */
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to")) {
-                mDeviceList = DeviceContent.ITEMS;
+                //mDeviceList = DeviceContent.ITEMS;
                 Toast.makeText(getApplicationContext(), "Unable to download" + s, Toast.LENGTH_SHORT)
                         .show();
                 return;
@@ -337,18 +341,19 @@ public class DeviceListActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
 
                 if (jsonObject.getBoolean("success")) {
-                    mDeviceList = Device.parseDeviceJson(
-                            jsonObject.getString("Devices"));
 
-
-
-                    if (!mDeviceList.isEmpty()) {
-                        setupRecyclerView((RecyclerView) mRecyclerView);
+                    if (jsonObject.has("Devices")) {
+                        mDeviceList = Device.parseDeviceJson(
+                                jsonObject.getString("Devices"));
+                        if (!mDeviceList.isEmpty()) {
+                            setupRecyclerView((RecyclerView) mRecyclerView);
+                        }
+                    } else if (jsonObject.has("Reviews")) {
+                        Review.parseReviewJson( jsonObject.getString("Reviews"));
                     }
                 }
-
             } catch (JSONException e) {
-                mDeviceList = DeviceContent.ITEMS;
+                //mDeviceList = DeviceContent.ITEMS;
                 Toast.makeText(getApplicationContext(), "JSON Error: " + e.getMessage(),
                         Toast.LENGTH_SHORT).show();
             }

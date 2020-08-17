@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
 
+import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
@@ -37,6 +38,8 @@ import java.util.List;
 public class ReviewListActivity extends AppCompatActivity {
 
     public static final String ARG_Device_ID = "device_id";
+    private static String mDeviceName;
+    private final ReviewListActivity mParentActivity = null;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -77,9 +80,11 @@ public class ReviewListActivity extends AppCompatActivity {
     private void launchReviewAddFragment() {
 
             Intent intent = new Intent(this, AddReviewActivity.class);
+            intent.putExtra(AddReviewFragment.ARG_REGISTER, mDeviceName);
             startActivity(intent);
-/*        AddDeviceFragment addReviewFragment = new AddDeviceFragment();
+/*
         if (mTwoPane) {
+            AddReviewFragment addReviewFragment = new AddReviewFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.review_detail_container, addReviewFragment).commit();
 
@@ -97,9 +102,10 @@ public class ReviewListActivity extends AppCompatActivity {
      * @param recyclerView
      */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        mDeviceName =getIntent().getStringExtra(
+                ReviewListActivity.ARG_Device_ID);
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this,
-                DeviceContent.ITEM_MAP.get(getIntent().getStringExtra(
-                        ReviewListActivity.ARG_Device_ID)).getReviews(), mTwoPane));
+                DeviceContent.ITEM_MAP.get(mDeviceName).getReviews(), mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -108,15 +114,17 @@ public class ReviewListActivity extends AppCompatActivity {
         private final ReviewListActivity mParentActivity;
         private final List<Review> mValues;
         private final boolean mTwoPane;
+
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Review item = (Review) view.getTag();
+
                 InfoHolder.InfoPass.setmReview(item);
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-
-                    arguments.putString(ReviewDetailFragment.ARG_REVIEW_ID, item.getmUserName());
+                    arguments.putString(ReviewDetailFragment.ARG_REVIEW_ID, mDeviceName);
                     ReviewDetailFragment fragment = new ReviewDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -125,7 +133,7 @@ public class ReviewListActivity extends AppCompatActivity {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, ReviewDetailActivity.class);
-                    intent.putExtra(ReviewDetailFragment.ARG_REVIEW_ID, item.getmUserName());
+                    intent.putExtra(ReviewDetailFragment.ARG_REVIEW_ID, mDeviceName);
 
                     context.startActivity(intent);
                 }
@@ -142,9 +150,10 @@ public class ReviewListActivity extends AppCompatActivity {
         SimpleItemRecyclerViewAdapter(ReviewListActivity parent,
                                       List<Review> items,
                                       boolean twoPane) {
-            mValues = items;
             mParentActivity = parent;
+            mValues = items;
             mTwoPane = twoPane;
+
         }
 
         /**
@@ -158,6 +167,7 @@ public class ReviewListActivity extends AppCompatActivity {
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.review_list_content, parent, false);
+
             return new ViewHolder(view);
         }
 
@@ -171,7 +181,6 @@ public class ReviewListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mIdView.setText(mValues.get(position).getmUserName());
             holder.mContentView.setText(String.valueOf(mValues.get(position).getRate()).substring(0,3) + "/5");
-
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }

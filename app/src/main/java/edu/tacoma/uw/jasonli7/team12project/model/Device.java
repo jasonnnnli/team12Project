@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 /**
  * Team 12 Group project.
@@ -26,7 +27,7 @@ public class Device implements Comparable<Device> {
     private List<Review> mReviews;
     private double mPrice;
 public static final String DEVICE_NAME = "devicename";
-public static final String DEVICE_LIST = "devicelist";
+public static final String DEVICE_PRICE = "deciceprice";
 
 
     public  Device(String name, List<Review> reviews, double price) {
@@ -46,6 +47,9 @@ public static final String DEVICE_LIST = "devicelist";
     double toReturn = 0.0;
     for (Review r : reviews) {
         toReturn+=r.getRate();
+    }
+    if (mNumberOfReviews == 0){
+        return 0;
     }
     return toReturn/mNumberOfReviews;
     }
@@ -103,25 +107,44 @@ public static final String DEVICE_LIST = "devicelist";
     }*/
    public static List<Device> parseDeviceJson(String deviceJson) throws JSONException {
        List<Device> devices = new ArrayList<>();
-
+       DeviceContent.ITEMS = new ArrayList<Device>();
+       DeviceContent.ITEM_MAP = new HashMap<String, Device>();
+       List<Review> temp;
        if (deviceJson != null) {
-           DeviceContent.loadReviews();
-           List<Review> dev = DeviceContent.mReviews;
+           //DeviceContent.loadReviews();
+
 
            JSONArray arr = new JSONArray(deviceJson);
 
            for (int i = 0; i < arr.length(); i++) {
-               DeviceContent.loadReviews();
-               dev = DeviceContent.mReviews;
+              // DeviceContent.loadReviews();
+               //temp =  new ArrayList<>();
                JSONObject obj = arr.getJSONObject(i);
-               Device device = new Device(obj.getString(Device.DEVICE_NAME), dev, DeviceContent.mockPrice());
+               String s = obj.getString(Device.DEVICE_NAME);
+
+
+                  temp = reviewListHelper(s);
+
+
+               Device device = new Device(s,
+                       temp, Double.parseDouble( obj.getString(Device.DEVICE_PRICE)));
+
                DeviceContent.addItem(device);
                devices.add(device);
            }
        }
        return devices;
    }
-
+    private static List<Review> reviewListHelper(String s) {
+       List<Review> temp = DeviceContent.mReviews;
+       List<Review> hold = new ArrayList<>();
+       for (Review r: temp) {
+           if (r.getmDeviceName().equals(s)) {
+               hold.add(r);
+           }
+       }
+       return hold;
+    }
     @Override
     public int compareTo(Device device) {
        if (DeviceContent.SORT_PRICE) {

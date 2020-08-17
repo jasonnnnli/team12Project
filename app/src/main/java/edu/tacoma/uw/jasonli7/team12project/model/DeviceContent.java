@@ -33,6 +33,8 @@ public class DeviceContent {
 
     public static  List<Review> mReviews;
 
+    public static int POSITION = 0;
+
     public static  boolean SORT_PRICE = false;
 
     private static final int COUNT = 25;
@@ -42,9 +44,10 @@ public class DeviceContent {
 
 
 
+
     private static Device createDeviceItem(int position) {
 
-        loadReviews();
+       // loadReviews();
         return new Device("Device: " + String.valueOf(position), mReviews, 100.56);
 
     }
@@ -53,24 +56,7 @@ public class DeviceContent {
         ITEM_MAP.put(item.getDeviceName(), item);
     }
 
-    static void loadReviews() {
-        mReviews = new ArrayList<Review>();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 15; i++) {
 
-            if (i % 3 == 0) {
-                sb.append("\n");
-            }
-            sb.append("Review ");
-        }
-        Random q = new Random();
-
-        for (int j = 0; j < 25; j++) {
-            double p = q.nextDouble() * 5;
-            Review r = new Review(j+"@"+j, sb.toString(), p);
-            mReviews.add(r);
-        }
-    }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
@@ -102,5 +88,6 @@ public class DeviceContent {
        }
 
        }
+
 
 }

@@ -33,6 +33,11 @@ public class ReviewDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_REVIEW_ID = "review_id";
+    public static int ARG_POSITION = 0;
+
+
+
+
 
     /**
      * The dummy content this fragment is presenting.
@@ -56,7 +61,7 @@ public class ReviewDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
             mItem = InfoHolder.InfoPass.getmReview();
-
+            //mItem = DeviceContent.ITEM_MAP.get(getArguments().getString(ARG_REVIEW_ID)).getReviews().get(DeviceContent.POSITION);
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {

@@ -84,6 +84,7 @@ public class AddDeviceFragment extends Fragment {
                 String devices = addDev.getText().toString();
 
                 Device device = new Device(devices, DeviceContent.mReviews, DeviceContent.mockPrice());
+
                 if (mAddDeviceListener != null) {
                     mAddDeviceListener.addDevice(device);
                 }

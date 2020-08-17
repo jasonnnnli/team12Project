@@ -22,6 +22,7 @@ import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.authenticate.LoginFragment;
 import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
+import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 
 /**
  * Team 12 Group project.
@@ -57,9 +58,10 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
         mAdd = new JSONObject();
 
         try {
-
+            double d = new Random(1200).nextDouble();
             mAdd.put("Devicename",device.getDeviceName());
-            mAdd.put("Decicedetail", new Random(111));
+            mAdd.put("Decicedetail", new Random(111).nextDouble());
+            mAdd.put("Deciceprice", DeviceContent.mockPrice());
 
             new addDeviceAsyncTask().execute(url.toString());
 
