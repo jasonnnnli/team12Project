@@ -2,19 +2,16 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.model.Device;
-import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
@@ -61,12 +58,10 @@ public class ReviewDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
             mItem = InfoHolder.InfoPass.getmReview();
-            //mItem = DeviceContent.ITEM_MAP.get(getArguments().getString(ARG_REVIEW_ID)).getReviews().get(DeviceContent.POSITION);
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getmUserName());
-           // }
         }
     }
 

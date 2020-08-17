@@ -28,6 +28,11 @@ import edu.tacoma.uw.jasonli7.team12project.R;
  */
 public class ReviewDetailActivity extends AppCompatActivity {
 
+    /**
+     * Retrieves review object.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

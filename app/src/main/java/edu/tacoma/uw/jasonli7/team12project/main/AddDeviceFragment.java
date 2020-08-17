@@ -1,19 +1,17 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
+import androidx.fragment.app.Fragment;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
-import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 /**
  * Team 12 Group project.

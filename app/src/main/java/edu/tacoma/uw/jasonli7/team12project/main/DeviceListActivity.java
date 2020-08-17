@@ -2,20 +2,10 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,16 +14,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import edu.tacoma.uw.jasonli7.team12project.R;
-
-import edu.tacoma.uw.jasonli7.team12project.authenticate.RegisterActivity;
-import edu.tacoma.uw.jasonli7.team12project.model.Device;
-import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
-import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
-import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -43,6 +32,11 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.tacoma.uw.jasonli7.team12project.R;
+import edu.tacoma.uw.jasonli7.team12project.model.Device;
+import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
+import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 /**
  * Team 12 Group project.
@@ -96,7 +90,7 @@ public class DeviceListActivity extends AppCompatActivity {
     }
 
     /**
-     * Click listener for the sorting menu
+     * Click listener for the sorting menu.
      *
      * @param item
      * @return
@@ -107,10 +101,12 @@ public class DeviceListActivity extends AppCompatActivity {
             DeviceContent.priceSort(false);
             assert mRecyclerView != null;
             setupRecyclerView((RecyclerView) mRecyclerView);
+
         } else if (item.getItemId() == R.id.sort_price) {
             DeviceContent.priceSort(true);
             assert mRecyclerView != null;
             setupRecyclerView((RecyclerView) mRecyclerView);
+
         } else if (item.getItemId() == R.id.range_below_300) {
             DeviceContent.PRICE_MIN = 0;
             DeviceContent.PRICE_MAX = 300;

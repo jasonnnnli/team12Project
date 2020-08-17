@@ -4,9 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Team 12 Group project.
@@ -28,6 +26,14 @@ public class Review {
     private String mReview;
     private double mRate;
 
+    /**
+     * Constructor.
+     *
+     * @param name
+     * @param devName
+     * @param review
+     * @param rating
+     */
     public Review(String name, String devName, String review, double rating) {
         mUserName = name;
         mDevName = devName;
@@ -47,25 +53,26 @@ public class Review {
         return mReview;
     }
 
+    /**
+     * Parses review objects from json objects.
+     *
+     * @param reviewJson
+     * @throws JSONException
+     */
     public static void parseReviewJson(String reviewJson) throws JSONException {
 
         if (reviewJson != null) {
             DeviceContent.mReviews = new ArrayList<>();
-            //List<Review> dev = new ArrayList<>();
 
             JSONArray arr = new JSONArray(reviewJson);
 
             for (int i = 0; i < arr.length(); i++) {
 
-
                 JSONObject obj = arr.getJSONObject(i);
                 Review review = new Review(obj.getString(Review.USER_NAME),obj.getString(Review.DEVICE_NAME),
                         obj.getString(Review.REVIEW_CONTENT),Double.parseDouble(obj.getString(Review.RATING)));
                 DeviceContent.mReviews.add(review);
-
             }
-            //DeviceContent.mReviews = dev;
         }
-
     }
 }

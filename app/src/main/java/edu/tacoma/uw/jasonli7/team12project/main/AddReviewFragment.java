@@ -2,19 +2,16 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
@@ -56,7 +53,12 @@ public class AddReviewFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    //commented calls are to connect button to AddReviewActivity.
+
+    /**
+     * Collects device name.
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +66,18 @@ public class AddReviewFragment extends Fragment {
         mActivity = this.getActivity();
         if (getArguments().containsKey(ARG_REGISTER)) {
             mDeviceName =  getArguments().getString(ARG_REGISTER);
-        } else {
-            mDeviceName = "Test Phone";
         }
 
     }
-    //commented calls are to connect button to AddReviewActivity.
+
+    /**
+     * Gets fields to add a review.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,6 +106,10 @@ public class AddReviewFragment extends Fragment {
         });
         return v;
     }
+
+    /**
+     * Interface to add listener.
+     */
     private AddReviewFragment.AddReviewListener mAddReviewListener;
     public interface AddReviewListener {
         public  void  addReview(Review review);

@@ -3,28 +3,24 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.tacoma.uw.jasonli7.team12project.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
-import edu.tacoma.uw.jasonli7.team12project.model.Device;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
+
+import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
-
-import java.util.List;
 
 /**
  * Team 12 Group project.
@@ -75,24 +71,13 @@ public class ReviewListActivity extends AppCompatActivity {
     }
 
     /**
-     *     Commented code for use with backend implementation.
+     * helper method for fab.
      */
     private void launchReviewAddFragment() {
 
             Intent intent = new Intent(this, AddReviewActivity.class);
             intent.putExtra(AddReviewFragment.ARG_REGISTER, mDeviceName);
             startActivity(intent);
-/*
-        if (mTwoPane) {
-            AddReviewFragment addReviewFragment = new AddReviewFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.review_detail_container, addReviewFragment).commit();
-
-        } else {
-            Intent intent = new Intent(this, ReviewDetailActivity.class);
-            intent.putExtra(ReviewDetailActivity.ADD_Review, true);
-            startActivity(intent);
-        }*/
 
     }
 
@@ -108,6 +93,9 @@ public class ReviewListActivity extends AppCompatActivity {
                 DeviceContent.ITEM_MAP.get(mDeviceName).getReviews(), mTwoPane));
     }
 
+    /**
+     * Recycler view listener.
+     */
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 

@@ -1,11 +1,11 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,8 +19,6 @@ import java.net.URL;
 import java.util.Random;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.authenticate.LoginFragment;
-import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 

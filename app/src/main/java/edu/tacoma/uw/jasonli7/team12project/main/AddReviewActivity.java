@@ -1,11 +1,11 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +18,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 /**
@@ -34,6 +33,11 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewFra
 
     private JSONObject mReview;
 
+    /**
+     * Sets up fragment passes device name.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,11 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewFra
                 .commit();
     }
 
+    /**
+     * Sets up json object -implemented by AddReviewListener.
+     *
+     * @param review
+     */
     @Override
     public void addReview(Review review) {
         StringBuilder url = new StringBuilder(getString(R.string.add_review));

@@ -1,7 +1,5 @@
 package edu.tacoma.uw.jasonli7.team12project.model;
 
-import java.util.ArrayList;
-import java.util.List;
 /**
  * Team 12 Group project.
  *
@@ -13,30 +11,27 @@ import java.util.List;
  */
 public class InfoHolder {
     public static class InfoPass{
-        public static String getmEmail() {
-            return mEmail;
-        }
 
         private static String mEmail;
-        private static List<Review> mReviewList;
+       // private static List<Review> mReviewList;
 
         private static Review mReview;
         public InfoPass() {
             mEmail = "";
-            mReviewList = new ArrayList<>();
+       //     mReviewList = new ArrayList<>();
         }
-        public static List<Review> getReviewList() {
-            return mReviewList;
-        }
+       // public static List<Review> getReviewList() {
+       //     return mReviewList;
+       // }
 
-        public static void setReviewList(List<Review> reviewList) {
-            if (mReviewList.size() > 1) {
-                mReviewList.clear();
-            }
-            for(Review r : reviewList) {
-                mReviewList.add(r);
-            }
-        }
+      //  public static void setReviewList(List<Review> reviewList) {
+      //      if (mReviewList.size() > 1) {
+      //          mReviewList.clear();
+     //       }
+      //      for(Review r : reviewList) {
+      //          mReviewList.add(r);
+      //      }
+     //   }
 
         public String getEmail() {
             return mEmail;
@@ -51,6 +46,9 @@ public class InfoHolder {
 
         public static void setmReview(Review mReview) {
             InfoPass.mReview = mReview;
+        }
+        public static String getmEmail() {
+            return mEmail;
         }
 
     }

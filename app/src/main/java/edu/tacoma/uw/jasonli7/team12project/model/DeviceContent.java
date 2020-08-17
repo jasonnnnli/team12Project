@@ -39,39 +39,31 @@ public class DeviceContent {
 
     private static final int COUNT = 25;
 
-
-
-
-
-
-
-    private static Device createDeviceItem(int position) {
-
-       // loadReviews();
-        return new Device("Device: " + String.valueOf(position), mReviews, 100.56);
-
-    }
+    /**
+     * Adds items to the map and list.
+     *
+     * @param item
+     */
     static void addItem(Device item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.getDeviceName(), item);
     }
 
-
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Device: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
-    }
-
-
+    /**
+     * Generates random amounts to send to back end as "price".
+     *
+     * @return
+     */
     public static double mockPrice() {
         Random q = new Random();
         return q.nextDouble() * 1000;
     }
+
+    /**
+     * sorts price and rating.
+     *
+     * @param sortPrice
+     */
     public static void priceSort(boolean sortPrice) {
        Device[] device = new Device[ITEMS.size()];
        int i = 0;

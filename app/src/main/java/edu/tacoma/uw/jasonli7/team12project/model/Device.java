@@ -1,12 +1,9 @@
 package edu.tacoma.uw.jasonli7.team12project.model;
 
-import android.media.Rating;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,54 +74,29 @@ public static final String DEVICE_PRICE = "deciceprice";
         return mPrice;
     }
 
-
-   /* public static List<Device> parseDeviceJson(String deviceJson) throws JSONException {
-        List<Device> deviceList = new ArrayList<>();
-        if (deviceJson != null) {
-
-            JSONArray arr = new JSONArray(deviceJson);
-
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject obj = arr.getJSONObject(i);
-                String s = obj.getString("devicename"); //name of device.
-                JSONArray jl = obj.getJSONArray("reviewlist"); //corresponding array.
-                List<Review> revs = new ArrayList<>(); //holds review objects.
-                Review forList;                        //Review container to load list.
-                for (int j = 0; j < jl.length(); j++) {
-                    JSONObject o = jl.getJSONObject(j);  //object from the inner array.
-                    String name = o.getString("reviewer"); //get reviewers name.
-                    String review = o.getString("review"); //get the corresponding review.
-                    double rate = Double.parseDouble(o.getString("rate")); //parse rating.
-                    forList = new Review(name, review, rate); //load the rating object.
-                    revs.add(forList);                       //add it the list of Ratings.
-                }
-                Device device = new Device(s, revs);  //load individual list and device name into device object.
-
-                deviceList.add(device);
-            }
-        }
-        return deviceList;
-    }*/
+    /**
+     * parses list od device json objects.
+     *
+     * @param deviceJson
+     * @return
+     * @throws JSONException
+     */
    public static List<Device> parseDeviceJson(String deviceJson) throws JSONException {
        List<Device> devices = new ArrayList<>();
        DeviceContent.ITEMS = new ArrayList<Device>();
        DeviceContent.ITEM_MAP = new HashMap<String, Device>();
        List<Review> temp;
-       if (deviceJson != null) {
-           //DeviceContent.loadReviews();
 
+       if (deviceJson != null) {
 
            JSONArray arr = new JSONArray(deviceJson);
 
            for (int i = 0; i < arr.length(); i++) {
-              // DeviceContent.loadReviews();
-               //temp =  new ArrayList<>();
+
                JSONObject obj = arr.getJSONObject(i);
                String s = obj.getString(Device.DEVICE_NAME);
 
-
                   temp = reviewListHelper(s);
-
 
                Device device = new Device(s,
                        temp, Double.parseDouble( obj.getString(Device.DEVICE_PRICE)));
@@ -135,6 +107,13 @@ public static final String DEVICE_PRICE = "deciceprice";
        }
        return devices;
    }
+
+    /**
+     * helper method for device parser.
+     *
+     * @param s
+     * @return
+     */
     private static List<Review> reviewListHelper(String s) {
        List<Review> temp = DeviceContent.mReviews;
        List<Review> hold = new ArrayList<>();
@@ -145,6 +124,13 @@ public static final String DEVICE_PRICE = "deciceprice";
        }
        return hold;
     }
+
+    /**
+     * Implemented comparable for sorts.
+     *
+     * @param device
+     * @return
+     */
     @Override
     public int compareTo(Device device) {
        if (DeviceContent.SORT_PRICE) {

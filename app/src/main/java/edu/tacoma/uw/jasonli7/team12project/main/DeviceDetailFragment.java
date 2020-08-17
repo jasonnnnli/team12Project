@@ -2,16 +2,14 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.text.DecimalFormat;
 
@@ -46,6 +44,11 @@ public class DeviceDetailFragment extends Fragment {
     public DeviceDetailFragment() {
     }
 
+    /**
+     * Gets device info.
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
