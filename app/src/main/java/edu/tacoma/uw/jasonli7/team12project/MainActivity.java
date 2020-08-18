@@ -13,8 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import edu.tacoma.uw.jasonli7.team12project.authenticate.PasswordResetActivity;
 import edu.tacoma.uw.jasonli7.team12project.authenticate.RegisterActivity;
 import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
+import edu.tacoma.uw.jasonli7.team12project.main.DeviceListActivity;
+
 /**
  * Team 12 Group project.
  *
@@ -26,12 +29,13 @@ import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button mLoginButton;
-    Button mRegButton;
+    private SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
+                Context.MODE_PRIVATE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.top);
@@ -56,11 +60,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
 public void onClick(View view) {
         if (view.getId() == R.id.login) {
-
-            Intent intent = new Intent(this, SignInActivity.class);
-            startActivity(intent);
-            finish();
-
+            if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+                Intent intent = new Intent(this, SignInActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(this, DeviceListActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
@@ -73,12 +81,13 @@ public void onClick(View view) {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            SharedPreferences sharedPreferences =
-                    getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-            sharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false)
-                    .commit();
 
             Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
+            finish();
+        } else if (R.id.change_pw == item.getItemId()) {
+
+            Intent i = new Intent(this, PasswordResetActivity.class);
             startActivity(i);
             finish();
         }

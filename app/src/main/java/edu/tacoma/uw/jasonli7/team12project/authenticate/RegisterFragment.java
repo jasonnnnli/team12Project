@@ -21,7 +21,6 @@ import edu.tacoma.uw.jasonli7.team12project.R;
  * A fragment to handle registration data.
  */
 public class RegisterFragment extends Fragment {
-
     private RegisterFragmentListener mAddListener;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

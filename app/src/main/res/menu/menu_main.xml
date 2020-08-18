@@ -5,5 +5,9 @@
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         android:title="@string/action_logout"
-        app:showAsAction="ifRoom"/>
+        />
+    <item
+        android:id="@+id/change_pw"
+        android:orderInCategory="100"
+        android:title="Reset Password" />
 </menu>

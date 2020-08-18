@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/top"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.AddReviewActivity"></activity>
+        <activity android:name=".authenticate.PasswordResetActivity"></activity>
+        <activity android:name=".main.AddReviewActivity" />
         <activity android:name=".main.AddDeviceActivity" />
         <activity
             android:name=".main.ReviewListActivity"
@@ -30,9 +31,7 @@
         <activity
             android:name=".main.DeviceListActivity"
             android:label="@string/title_device_list"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".main.DeviceDetailActivity"
             android:label="@string/title_device_detail"
@@ -43,9 +42,7 @@
                 android:value="edu.tacoma.uw.jasonli7.team12project.main.DeviceListActivity" />
         </activity>
         <activity android:name=".authenticate.RegisterActivity" />
-        <activity android:name=".authenticate.SignInActivity">
-
-        </activity>
+        <activity android:name=".authenticate.SignInActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

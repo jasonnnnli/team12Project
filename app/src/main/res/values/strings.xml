@@ -11,6 +11,7 @@
     <string name="email_address_id">Enter email address</string>
     <string name="password_id">Enter password</string>
     <string name="LOGIN_PREFS">edu.tacoma.uw.jasonli7.team12project.PREFS</string>
+    <string name="USERID_PREFS">edu.tacoma.uw.jasonli7.team12project.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
     <string name="login_button">Log in</string>
     <string name="login_failed">"Login failed"</string>

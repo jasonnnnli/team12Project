@@ -1,11 +1,14 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +35,7 @@ import edu.tacoma.uw.jasonli7.team12project.model.Review;
 public class AddReviewActivity extends AppCompatActivity implements AddReviewFragment.AddReviewListener {
 
     private JSONObject mReview;
+    SharedPreferences mPrefs;
 
     /**
      * Sets up fragment passes device name.
@@ -42,9 +46,19 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
+        mPrefs = getSharedPreferences(getString(R.string.LOGIN_PREFS),
+                Context.MODE_PRIVATE);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.top);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+
         Bundle arguments = new Bundle();
         arguments.putString(AddReviewFragment.ARG_REGISTER,
                 getIntent().getStringExtra(AddReviewFragment.ARG_REGISTER));
+        arguments.putString(AddReviewFragment.ARG_USER,
+               String.valueOf(mPrefs.getString("USERID", "string")));
         AddReviewFragment fragment = new AddReviewFragment();
         fragment.setArguments(arguments);
         getSupportFragmentManager().beginTransaction()

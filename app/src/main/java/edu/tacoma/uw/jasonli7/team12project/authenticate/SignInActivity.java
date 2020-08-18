@@ -56,7 +56,10 @@ protected void onCreate(Bundle savedInstanceState) {
         @Override
 public void login(String email, String pwd) {
         StringBuilder url = new StringBuilder(getString(R.string.add_login));
-
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .commit();
         mLogin = new JSONObject();
 
         try {
@@ -73,7 +76,7 @@ public void login(String email, String pwd) {
         private void goToMain() {
                 Intent intent = new Intent(this, DeviceListActivity.class);
                 startActivity(intent);
-                finish();
+
         }
 
         /**
@@ -128,8 +131,17 @@ public void login(String email, String pwd) {
                         try {
                                 JSONObject jsonObject = new JSONObject(s);
                                 if (jsonObject.getBoolean("success")) {
-                                        Toast.makeText(getApplicationContext(), "User login successful"
+                                      String st =  jsonObject.getString("members");
+                                        mSharedPreferences
+                                                .edit()
+                                                .putString("USERID",  st)
+                                                .apply();
+                                        Toast.makeText(getApplicationContext(), "User login successful"// + st
                                                 , Toast.LENGTH_SHORT).show();
+                                       // SharedPreferences share = getSharedPreferences(getString(R.string.USERID_PREFS),
+                                               // Context.MODE_PRIVATE);
+
+
                                         goToMain();
                                 }
                                 else {

@@ -1,12 +1,15 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,7 +30,9 @@ import edu.tacoma.uw.jasonli7.team12project.model.Review;
 public class AddReviewFragment extends Fragment {
 
     public static String ARG_REGISTER = "register";
+    public static String ARG_USER = "user";
     private String mDeviceName;
+    private String mUserId;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
@@ -63,9 +68,13 @@ public class AddReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddReviewListener = (AddReviewListener) getActivity();
+
         mActivity = this.getActivity();
         if (getArguments().containsKey(ARG_REGISTER)) {
             mDeviceName =  getArguments().getString(ARG_REGISTER);
+        }
+        if (getArguments().containsKey(ARG_USER)) {
+            mUserId =  getArguments().getString(ARG_USER);
         }
 
     }
@@ -83,22 +92,21 @@ public class AddReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add_review, container
                 , false);
-        getActivity().setTitle("Signed in as: " +InfoHolder.InfoPass.getmEmail());
+        getActivity().setTitle("Signed in as: " +mUserId);
 
-        final EditText userId = v.findViewById(R.id.add_user_id);
+        final TextView userId = v.findViewById(R.id.add_user_id);
         final EditText addReview = v.findViewById(R.id.add_review);
         final EditText rating = v.findViewById(R.id.editTextNumber);
         Button addButton = v.findViewById(R.id.btn_add_review);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String uID = userId.getText().toString();
+                userId.setText(mUserId);
                 String rev = addReview.getText().toString();
                 String rat = rating.getText().toString();
                 double x = Double.parseDouble(rat);
                 if (mAddReviewListener != null && (x <= 5 && x >= 0 )) {
-                    mAddReviewListener.addReview(new Review(uID, mDeviceName, rev, x));
+                    mAddReviewListener.addReview(new Review(mUserId, mDeviceName, rev, x));
                 } else {
                     Toast.makeText(mActivity, "Please enter a number between 0-5", Toast.LENGTH_SHORT).show();
                 }
