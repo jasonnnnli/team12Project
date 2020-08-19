@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+
     <string name="add_login">https://team12-services-backend.herokuapp.com/login</string>
 
+    <string name="add_review">https://team12-services-backend.herokuapp.com/addreviews</string>
+
     <string name="add_register">https://team12-services-backend.herokuapp.com/register</string>
-    <string name="get_devices">https://team12-services-backend.herokuapp.com/Devices</string>
+
+    <string name="get_devices">https://team12-services-backend.herokuapp.com/devices</string>
+
     <string name="add_devices">https://team12-services-backend.herokuapp.com/adddevices</string>
+
+    <string name="get_reviews">https://team12-services-backend.herokuapp.com/reviews</string>
+
+    <string name="add_reset">https://team12-services-backend.herokuapp.com/changepassword</string>
 
 </resources>
