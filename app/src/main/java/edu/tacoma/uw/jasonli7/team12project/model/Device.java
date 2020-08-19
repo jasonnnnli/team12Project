@@ -40,7 +40,7 @@ public static final String DEVICE_PRICE = "deciceprice";
     public int getmNumberOfReviews() {
         return mNumberOfReviews;
     }
-    private double calcAvg(List<Review> reviews) {
+    public  double calcAvg(List<Review> reviews) {
     double toReturn = 0.0;
     for (Review r : reviews) {
         toReturn+=r.getRate();
