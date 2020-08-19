@@ -1,7 +1,8 @@
 # Ateam12Project
 daniel stockett jasonli
-1
-2.implemented user story high
+1 every bug is fixed from previous sprint
+2.implemented user story
+high
 As a user, I would like to rate my device and write a review so I can share the opinion of it and help other users to make purchasing decisions.
 As a user, I would like to find a device based on my price range and preferences so that i can decide which device to upgrade to.
 As a user, I would like to be able to create an account so i get access to the app.
@@ -13,5 +14,8 @@ As a user, I would like to change my password if I forget it so that i can recov
 Low
 As a user, I would like to compare devices against one another so I can choose which one is most suitable for me based on price and performance. 
 As a user, I would like to check the full details of the device I am using so that i have a better understanding of what features i may be looking for.
-3
-4
+As a user, I would like to share my device’s information to other users via the app  so that the app properly reports the device's specifications.
+
+3 contain save data such as user information for able to  login, devices inforamtion for user to choose ideal devices and reviews for other user to read.
+4  Content Sharing to send or receive information that sharing devices information
+

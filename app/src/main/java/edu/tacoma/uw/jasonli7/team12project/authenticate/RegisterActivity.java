@@ -33,6 +33,7 @@ import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
  */
 public class RegisterActivity extends AppCompatActivity implements RegisterFragment.RegisterFragmentListener {
     private SharedPreferences mSharedPreferences;
+    private boolean mTest = true;
     private JSONObject mAddUser;
     private String mUserName;
 
