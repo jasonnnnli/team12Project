@@ -3,6 +3,7 @@ package edu.tacoma.uw.jasonli7.team12project.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import edu.tacoma.uw.jasonli7.team12project.R;
 public class DeviceDetailActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String ADD_DEVICE = "ADD_DEVICE";
     private Button mBut;
+    private String mDevice;
 
     /**
      * Does some of the heavy lifting for DeviceFragment.
@@ -47,13 +49,20 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "Hey, what do you think about the " + mDevice+"?";
+                String shareSub = "Get advice from a friend";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(myIntent, "Ask a friend with:"));
             }
         });
 
+
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
+        mDevice =  getIntent().getStringExtra(DeviceDetailFragment.ARG_ITEM_ID);
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -64,7 +73,7 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
             // using a fragment transaction.
             Bundle arguments = new Bundle();
             arguments.putString(DeviceDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(DeviceDetailFragment.ARG_ITEM_ID));
+                    mDevice);
             DeviceDetailFragment fragment = new DeviceDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -74,6 +83,11 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
             AddDeviceFragment fragment = new AddDeviceFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.device_detail_container, fragment).commit();
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.feature_menu, menu);
+        return true;
     }
 
     /**
@@ -85,10 +99,10 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
-
-            navigateUpTo(new Intent(this, DeviceListActivity.class));
-
+        if (id == R.id.feature_list) {
+            Intent intent = new Intent(this, FeaturesActivity.class);
+            intent.putExtra(FeaturesActivity.FEATURE_DEVICE, getIntent().getStringExtra(DeviceDetailFragment.ARG_ITEM_ID));
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -99,13 +113,14 @@ public class DeviceDetailActivity extends AppCompatActivity implements View.OnCl
      */
     @Override
     public void onClick(View view) {
-       // Intent intent = new Intent(this, ReviewListActivity.class);
-       // startActivity(intent);
-        //Device item = (Device) view.getTag();
         Context context = view.getContext();
-        Intent intent = new Intent(context, ReviewListActivity.class);
-        intent.putExtra(ReviewListActivity.ARG_Device_ID, getIntent().getStringExtra(DeviceDetailFragment.ARG_ITEM_ID));
+        Intent intent = null;
+        if (view.getId() == R.id.reviews_btn) {
+            
+            intent = new Intent(context, ReviewListActivity.class);
+            intent.putExtra(ReviewListActivity.ARG_Device_ID, getIntent().getStringExtra(DeviceDetailFragment.ARG_ITEM_ID));
 
+        }
         context.startActivity(intent);
     }
 }

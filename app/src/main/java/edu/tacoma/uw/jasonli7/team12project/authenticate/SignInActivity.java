@@ -76,7 +76,7 @@ public void login(String email, String pwd) {
         private void goToMain() {
                 Intent intent = new Intent(this, DeviceListActivity.class);
                 startActivity(intent);
-
+                finish();
         }
 
         /**

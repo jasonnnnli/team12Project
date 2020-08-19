@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterFragm
     private void goToMain() {
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
-
+        finish();
     }
 
     /**

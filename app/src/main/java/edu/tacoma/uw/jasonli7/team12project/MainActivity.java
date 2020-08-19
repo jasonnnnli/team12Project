@@ -63,11 +63,11 @@ public void onClick(View view) {
             if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
                 Intent intent = new Intent(this, SignInActivity.class);
                 startActivity(intent);
-                finish();
+
             } else {
                 Intent intent = new Intent(this, DeviceListActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         }
     }
@@ -84,12 +84,12 @@ public void onClick(View view) {
 
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
-            finish();
+
         } else if (R.id.change_pw == item.getItemId()) {
 
             Intent i = new Intent(this, PasswordResetActivity.class);
             startActivity(i);
-            finish();
+
         }
         return super.onOptionsItemSelected(item);
     }

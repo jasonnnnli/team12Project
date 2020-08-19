@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/top"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".authenticate.PasswordResetActivity"></activity>
+        <activity
+            android:name=".main.FeaturesActivity"
+            android:label="@string/title_activity_features"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".authenticate.PasswordResetActivity" />
         <activity android:name=".main.AddReviewActivity" />
         <activity android:name=".main.AddDeviceActivity" />
         <activity
