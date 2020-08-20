@@ -16,4 +16,7 @@
 
     <string name="add_reset">https://team12-services-backend.herokuapp.com/changepassword</string>
 
+    <string name="get_features">https://team12-services-backend.herokuapp.com/feature</string>
+
+
 </resources>

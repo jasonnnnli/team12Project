@@ -1,11 +1,11 @@
 package edu.tacoma.uw.jasonli7.team12project.main;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,58 +16,56 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Random;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
+import edu.tacoma.uw.jasonli7.team12project.model.Features;
 
-/**
- * Team 12 Group project.
- *
- * @author Daniel Stocksett.
- *
- * @version 2nd Aug 2020.
- *
- * An activity for communicating new device data to the server.
- */
-public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFragment.AddDeviceListener {
+public class AddFeatureActivity extends AppCompatActivity implements AddFeatureFragment.AddFeatureListener {
+
+    public static final String PASS_DEVICE = "pass_device";
+    private String mDevice;
     private JSONObject mAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_device);
-        AddDeviceFragment fragment = new AddDeviceFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.add_Device_fragment_id, fragment)
-                .commit();
+        setContentView(R.layout.activity_add_feature);
+        mDevice =  getIntent().getStringExtra(PASS_DEVICE);
+        if (savedInstanceState == null) {
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+            Bundle arguments = new Bundle();
+            arguments.putString(AddFeatureFragment.ARG_FEATURE_ID,
+                    mDevice);
+            AddFeatureFragment fragment = new AddFeatureFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.add_feature_fragment_id, fragment)
+                    .commit();
+        }
     }
 
-    /**
-     * interface method. adds device to the database.
-     *
-     * @param device
-     */
     @Override
-    public void addDevice(Device device) {
-        StringBuilder url = new StringBuilder(getString(R.string.add_devices));
+    public void addFeature(Features feature) {
+        StringBuilder url = new StringBuilder("https://team12-services-backend.herokuapp.com/addfeature");
 
         mAdd = new JSONObject();
 
         try {
 
-            mAdd.put("Devicename",device.getDeviceName());
-            mAdd.put("Decicedetail", new Random(111).nextDouble());
-            mAdd.put("Deciceprice", DeviceContent.mockPrice());
+            mAdd.put("Devicename",feature.getDevice());
+            mAdd.put("featurecontent", feature.getFeature());
 
-            new addDeviceAsyncTask().execute(url.toString());
+
+            new addFeatureAsyncTask().execute(url.toString());
 
         } catch (JSONException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
     /**
      * helper method to return to DeviceListActivity.
      */
@@ -79,7 +77,7 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
     /**
      * Creates and sends json object.
      */
-    private class addDeviceAsyncTask extends AsyncTask<String, Void, String> {
+    private class addFeatureAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -109,7 +107,7 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to add device, Reason: "
+                    response = "Unable to add feature, Reason: "
                             + e.getMessage();
                 } finally {
                     if (urlConnection != null)
@@ -128,12 +126,14 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-                    Toast.makeText(getApplicationContext(), "Device added successfully"
+                    Toast.makeText(getApplicationContext(), "Feature added successfully"
                             , Toast.LENGTH_SHORT).show();
+                    Features.FEATURE_MAP = new HashMap<>();
                     goToMain();
+
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Could not add device: "
+                    Toast.makeText(getApplicationContext(), "Could not add feature: "
                                     + jsonObject.getString("error")
                             , Toast.LENGTH_LONG).show();
 
@@ -146,5 +146,6 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
             }
         }
     }
+
 
 }
