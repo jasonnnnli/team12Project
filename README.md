@@ -13,5 +13,5 @@ As a user, I would like to check reviews by other customers because I want to kn
 As a user, I would like to change my password if I forget it so that i can recover my account if i forget the password.
 
 3 contain save data such as user information for able to  login, devices inforamtion for user to choose ideal devices and reviews for other user to read.
-4  Content Sharing to send or receive information that sharing devices information
+4  Content Sharing to send or receive information that sharing devices information  implemented in the devices details. show ui as floating action button which the button for share.
 
