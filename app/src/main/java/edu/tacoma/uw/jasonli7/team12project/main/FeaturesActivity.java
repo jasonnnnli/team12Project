@@ -76,6 +76,7 @@ public class FeaturesActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(this, AddFeatureActivity.class);
             intent.putExtra(AddFeatureActivity.PASS_DEVICE, getIntent().getStringExtra(FeaturesActivity.FEATURE_DEVICE));
             startActivity(intent);
+            finish();
 
         }
     }

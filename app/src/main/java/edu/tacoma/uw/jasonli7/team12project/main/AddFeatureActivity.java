@@ -85,6 +85,7 @@ public class AddFeatureActivity extends AppCompatActivity implements AddFeatureF
     private void goToMain() {
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**

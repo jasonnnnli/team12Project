@@ -74,6 +74,7 @@ public class AddDeviceActivity extends AppCompatActivity  implements AddDeviceFr
     private void goToMain() {
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**

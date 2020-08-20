@@ -98,6 +98,7 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewFra
     private void goToMain() {
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
+        finish();
     }
     /**
      * Parses and sends json objects.
