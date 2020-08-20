@@ -17,5 +17,5 @@ As a user, I would like to check the full details of the device I am using so th
 As a user, I would like to share my device’s information to other users via the app  so that the app properly reports the device's specifications.
 
 3 contain save data such as user information for able to  login, devices inforamtion for user to choose ideal devices and reviews for other user to read.
-4  Content Sharing to send or receive information that sharing devices information  implemented in the devices details. 
+4  Content Sharing to send or receive information that sharing devices information  implemented in the devices details. show ui as floating action button which the button for share.
 
