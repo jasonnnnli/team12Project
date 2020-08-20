@@ -36,6 +36,7 @@ import java.util.List;
 import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.model.Device;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
+import edu.tacoma.uw.jasonli7.team12project.model.Features;
 import edu.tacoma.uw.jasonli7.team12project.model.Review;
 
 /**
@@ -147,6 +148,8 @@ public class DeviceListActivity extends AppCompatActivity {
             if (mDeviceList == null) {
                 new DeviceTask().execute(getString(R.string.get_reviews));
 
+                new DeviceTask().execute(getString(R.string.get_features));
+
                 new DeviceTask().execute(getString(R.string.get_devices));
             }
         }
@@ -167,7 +170,7 @@ public class DeviceListActivity extends AppCompatActivity {
             mDeviceList = new ArrayList<>();
             List<Device> temp = new ArrayList<>();
             if (DeviceContent.PRICE_MIN > 0 || DeviceContent.PRICE_MAX < 1000000) {
-                                                       //__________________________--------------->test sorts!
+
                 for (Device d : DeviceContent.ITEMS) {
                     if (d.getPrice() > DeviceContent.PRICE_MIN && d.getPrice() < DeviceContent.PRICE_MAX) {
                         temp.add(d);
@@ -346,6 +349,8 @@ public class DeviceListActivity extends AppCompatActivity {
                         }
                     } else if (jsonObject.has("Reviews")) {
                         Review.parseReviewJson( jsonObject.getString("Reviews"));
+                    } else if (jsonObject.has("feature")) {
+                        Features.parseFeatureJson(jsonObject.getString("feature"));
                     }
                 }
             } catch (JSONException e) {
