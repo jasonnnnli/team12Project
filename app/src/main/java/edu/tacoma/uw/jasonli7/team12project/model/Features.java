@@ -62,7 +62,7 @@ public class Features {
      * @throws JSONException
      */
     public static void parseFeatureJson(String feature)   throws JSONException {
-
+        FEATURE_MAP = new HashMap<>();
         if (feature != null) {
 
 
