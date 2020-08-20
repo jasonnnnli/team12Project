@@ -22,12 +22,25 @@ import java.net.URL;
 import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.main.DeviceListActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.InfoHolder;
-
+/**
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 17th Aug 2020.
+ *
+ * Activity to send user reset password data.
+ */
 public class PasswordResetActivity extends AppCompatActivity implements  PasswordResetFragment.ResetListener {
     private SharedPreferences mSharedPreferences;
     private JSONObject mAddUser;
     private String mUserName;
 
+    /**
+     * Launches PasswordResetFragment.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +53,13 @@ public class PasswordResetActivity extends AppCompatActivity implements  Passwor
                 .commit();
     }
 
+    /**
+     * Implemented from listener.
+     *
+     * @param email
+     * @param name
+     * @param pwd
+     */
     @Override
     public void reset(String email, String name, String pwd) {
         StringBuilder url = new StringBuilder(getString(R.string.add_reset));

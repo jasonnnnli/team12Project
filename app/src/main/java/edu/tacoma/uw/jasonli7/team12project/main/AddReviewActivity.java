@@ -28,7 +28,7 @@ import edu.tacoma.uw.jasonli7.team12project.model.Review;
  *
  * @author Daniel Stocksett.
  *
- * @version 3rd Aug 2020.
+ * @version 17th Aug 2020.
  *
  * An activity for adding new review data to the server.
  */

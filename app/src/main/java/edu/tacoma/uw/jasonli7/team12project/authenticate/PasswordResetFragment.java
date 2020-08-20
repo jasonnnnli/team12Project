@@ -14,11 +14,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
-
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link PasswordResetFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 17th Aug 2020.
+ *
+ * A fragment to handle reset password data.
  */
 public class PasswordResetFragment extends Fragment {
 
@@ -43,7 +46,6 @@ public class PasswordResetFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment PasswordResetFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static PasswordResetFragment newInstance(String param1, String param2) {
         PasswordResetFragment fragment = new PasswordResetFragment();
         Bundle args = new Bundle();
@@ -61,7 +63,7 @@ public class PasswordResetFragment extends Fragment {
     }
 
     /**
-     * Contains listener. gathers regestration information from the user.
+     * Contains listener. gathers password reset information from the user.
      *
      * @param inflater
      * @param container

@@ -18,9 +18,13 @@ import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.Features;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddFeatureFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 18th Aug 2020.
+ *
+ * A fragment to handle login data.
  */
 public class AddFeatureFragment extends Fragment {
     public static final String ARG_FEATURE_ID = "device_name";
@@ -28,12 +32,11 @@ public class AddFeatureFragment extends Fragment {
     Activity mActivity;
     private AddFeatureFragment.AddFeatureListener mAddFeatureListener;
 
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -49,7 +52,6 @@ public class AddFeatureFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment AddFeatureFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AddFeatureFragment newInstance(String param1, String param2) {
         AddFeatureFragment fragment = new AddFeatureFragment();
         Bundle args = new Bundle();
@@ -59,6 +61,11 @@ public class AddFeatureFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Sets up fragment.
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,14 @@ public class AddFeatureFragment extends Fragment {
         mActivity = this.getActivity();
     }
 
+    /**
+     * Retrieves feature data from fields.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

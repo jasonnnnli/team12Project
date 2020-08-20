@@ -23,10 +23,17 @@ public class Device implements Comparable<Device> {
     private double mAvgRate;
     private List<Review> mReviews;
     private double mPrice;
-public static final String DEVICE_NAME = "devicename";
-public static final String DEVICE_PRICE = "deciceprice";
+    public static final String DEVICE_NAME = "devicename";
+    public static final String DEVICE_PRICE = "deciceprice";
 
 
+    /**
+     * Constructor.
+     *
+     * @param name
+     * @param reviews
+     * @param price
+     */
     public  Device(String name, List<Review> reviews, double price) {
         mDeviceName = name;
         mNumberOfReviews = reviews.size();
@@ -40,11 +47,21 @@ public static final String DEVICE_PRICE = "deciceprice";
     public int getmNumberOfReviews() {
         return mNumberOfReviews;
     }
+
+    /**
+     * Calculates average review.
+     *
+     * @param reviews
+     * @return
+     */
     public  double calcAvg(List<Review> reviews) {
     double toReturn = 0.0;
     for (Review r : reviews) {
         toReturn+=r.getRate();
     }
+        /**
+         * Gets number of reviews.
+         */
     if (mNumberOfReviews == 0){
         return 0;
     }

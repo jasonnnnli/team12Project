@@ -22,7 +22,15 @@ import java.util.Random;
 import edu.tacoma.uw.jasonli7.team12project.R;
 import edu.tacoma.uw.jasonli7.team12project.model.DeviceContent;
 import edu.tacoma.uw.jasonli7.team12project.model.Features;
-
+/**
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 18th Aug 2020.
+ *
+ * Activity to add features.
+ */
 public class AddFeatureActivity extends AppCompatActivity implements AddFeatureFragment.AddFeatureListener {
 
     public static final String PASS_DEVICE = "pass_device";
@@ -48,6 +56,11 @@ public class AddFeatureActivity extends AppCompatActivity implements AddFeatureF
         }
     }
 
+    /**
+     * Implemented from add feature listener.
+     *
+     * @param feature
+     */
     @Override
     public void addFeature(Features feature) {
         StringBuilder url = new StringBuilder("https://team12-services-backend.herokuapp.com/addfeature");
