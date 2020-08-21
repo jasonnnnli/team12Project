@@ -6,7 +6,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 19th Aug 2020.
+ *
+ * A class to hold and process features objects.
+ */
 public class Features {
     public static HashMap<String, ArrayList<String>> FEATURE_MAP = new HashMap<>();
 
@@ -46,16 +54,15 @@ public class Features {
     public static void addDevice(String device) {
         FEATURE_MAP.put(device, new ArrayList<String>());
     }
-    public static void loadMap() {
-        String s = "Bat Phone";
-        addDevice(s);
-        addFeature(s, "Batarang");
-        addFeature(s, "Grappling Hook");
-        addFeature(s, "Gps tracking device");
 
-    }
+    /**
+     * Parses features from JSON objects.
+     *
+     * @param feature
+     * @throws JSONException
+     */
     public static void parseFeatureJson(String feature)   throws JSONException {
-
+        FEATURE_MAP = new HashMap<>();
         if (feature != null) {
 
 

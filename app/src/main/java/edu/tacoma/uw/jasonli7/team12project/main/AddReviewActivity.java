@@ -28,7 +28,7 @@ import edu.tacoma.uw.jasonli7.team12project.model.Review;
  *
  * @author Daniel Stocksett.
  *
- * @version 3rd Aug 2020.
+ * @version 17th Aug 2020.
  *
  * An activity for adding new review data to the server.
  */
@@ -98,6 +98,7 @@ public class AddReviewActivity extends AppCompatActivity implements AddReviewFra
     private void goToMain() {
         Intent intent = new Intent(this, DeviceListActivity.class);
         startActivity(intent);
+        finish();
     }
     /**
      * Parses and sends json objects.

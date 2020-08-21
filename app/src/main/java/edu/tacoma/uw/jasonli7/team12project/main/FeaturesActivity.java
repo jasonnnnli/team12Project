@@ -12,15 +12,27 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 
 import edu.tacoma.uw.jasonli7.team12project.R;
-import edu.tacoma.uw.jasonli7.team12project.authenticate.SignInActivity;
 import edu.tacoma.uw.jasonli7.team12project.model.Features;
-
+/**
+ * Team 12 Group project.
+ *
+ * @author Daniel Stocksett.
+ *
+ * @version 18th Aug 2020.
+ *
+ * Displays features data.
+ */
 public class FeaturesActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String FEATURE_DEVICE = "feature_device";
     private String mDevice;
     ArrayList<String> mFeaturesList;
     private Button mLoginButton;
 
+    /**
+     * Sets up and displays features.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +64,11 @@ public class FeaturesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Takes user to add features.
+     *
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button3) {
@@ -59,6 +76,7 @@ public class FeaturesActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(this, AddFeatureActivity.class);
             intent.putExtra(AddFeatureActivity.PASS_DEVICE, getIntent().getStringExtra(FeaturesActivity.FEATURE_DEVICE));
             startActivity(intent);
+            finish();
 
         }
     }
